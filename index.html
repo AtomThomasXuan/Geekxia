@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实用软件资源库</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            margin-bottom: 30px;
+        }
+        header h1 {
+            font-size: 2.8rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        header p {
+            font-size: 1.2rem;
+            color: #7f8c8d;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .search-box {
+            max-width: 600px;
+            margin: 30px auto 40px;
+            position: relative;
+        }
+        .search-box input {
+            width: 100%;
+            padding: 15px 20px 15px 50px;
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        .search-box input:focus {
+            outline: none;
+            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+        }
+        .search-box i {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #95a5a6;
+            font-size: 1.2rem;
+        }
+        .software-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        .software-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .software-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+        .card-header {
+            padding: 25px 25px 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .card-header h3 {
+            font-size: 1.5rem;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
+        .card-header h3 i {
+            margin-right: 10px;
+            color: #3498db;
+        }
+        .card-body {
+            padding: 25px;
+            flex-grow: 1;
+        }
+        .link-group {
+            margin-top: 20px;
+        }
+        .link-btn {
+            display: inline-flex;
+            align-items: center;
+            padding: 12px 20px;
+            margin-right: 12px;
+            margin-bottom: 12px;
+            background: #f8f9fa;
+            color: #2c3e50;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: all 0.2s ease;
+            border: 1px solid #eaeaea;
+        }
+        .link-btn:hover {
+            transform: scale(1.05);
+        }
+        .link-btn.official {
+            background: #e3f2fd;
+            color: #1565c0;
+        }
+        .link-btn.cloud {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+        .link-btn i {
+            margin-right: 8px;
+        }
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding: 25px;
+            color: #7f8c8d;
+            font-size: 0.95rem;
+            border-top: 1px solid #e0e0e0;
+        }
+        @media (max-width: 768px) {
+            .software-grid {
+                grid-template-columns: 1fr;
+            }
+            header h1 {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-toolbox"></i> 实用软件资源库</h1>
+            <p>精心收集各类实用工具、免费软件与教程资源，持续更新，助力高效工作与学习。</p>
+        </header>
+
+        <div class="search-box">
+            <i class="fas fa-search"></i>
+            <input type="text" id="searchInput" placeholder="输入软件名称或关键词进行搜索...">
+        </div>
+
+        <div class="software-grid" id="softwareContainer">
+            <!-- 软件卡片将通过JavaScript动态生成 -->
+        </div>
+
+        <footer>
+            <p>本页面仅用于分享与学习目的，所有资源版权归原作者所有 | 最后更新：<span id="currentDate"></span></p>
+            <p>Powered by GitHub Pages | 使用建议或问题反馈请通过GitHub提交</p>
+        </footer>
+    </div>
+
+    <script>
+        // 软件数据数组 - 在这里添加或修改你的软件
+        const softwareData = [
+            {
+                name: "VS Code",
+                icon: "fas fa-code",
+                description: "微软推出的免费、开源、强大的代码编辑器，支持多种编程语言和丰富的扩展插件。",
+                officialUrl: "https://code.visualstudio.com/",
+                cloudUrl: "https://pan.example.com/s/vscode",
+                category: "开发工具"
+            },
+            {
+                name: "OBS Studio",
+                icon: "fas fa-video",
+                description: "免费开源的视频录制和直播推流软件，功能强大，广泛用于游戏录制、课程录制和直播。",
+                officialUrl: "https://obsproject.com/",
+                cloudUrl: "https://pan.example.com/s/obs",
+                category: "媒体工具"
+            },
+            {
+                name: "GIMP",
+                icon: "fas fa-paint-brush",
+                description: "功能强大的免费开源图像编辑器，常被看作是Adobe Photoshop的免费替代品。",
+                officialUrl: "https://www.gimp.org/",
+                cloudUrl: "https://pan.example.com/s/gimp",
+                category: "设计工具"
+            },
+            {
+                name: "7-Zip",
+                icon: "fas fa-file-archive",
+                description: "完全免费的开源文件压缩/解压工具，支持RAR、ZIP、TAR等多种压缩格式。",
+                officialUrl: "https://www.7-zip.org/",
+                cloudUrl: "https://pan.example.com/s/7zip",
+                category: "系统工具"
+            },
+            {
+                name: "Notion",
+                icon: "fas fa-sticky-note",
+                description: "一款集笔记、任务、数据库、知识库于一体的全能型协作工具，个人版免费。",
+                officialUrl: "https://www.notion.so/",
+                cloudUrl: "https://pan.example.com/s/notion",
+                category: "效率工具"
+            },
+            {
+                name: "VLC Media Player",
+                icon: "fas fa-play-circle",
+                description: "免费开源的跨平台多媒体播放器，几乎可以播放所有格式的音视频文件。",
+                officialUrl: "https://www.videolan.org/vlc/",
+                cloudUrl: "https://pan.example.com/s/vlc",
+                category: "媒体工具"
+            }
+        ];
+
+        // 生成软件卡片
+        function renderSoftwareCards(softwareList) {
+            const container = document.getElementById('softwareContainer');
+            container.innerHTML = '';
+            
+            softwareList.forEach(software => {
+                const card = document.createElement('div');
+                card.className = 'software-card';
+                card.innerHTML = `
+                    <div class="card-header">
+                        <h3><i class="${software.icon}"></i> ${software.name}</h3>
+                        <p><i class="fas fa-tag"></i> 分类：${software.category}</p>
+                    </div>
+                    <div class="card-body">
+                        <p>${software.description}</p>
+                        <div class="link-group">
+                            <a href="${software.officialUrl}" target="_blank" class="link-btn official">
+                                <i class="fas fa-external-link-alt"></i> 官方网站
+                            </a>
+                            <a href="${software.cloudUrl}" target="_blank" class="link-btn cloud">
+                                <i class="fas fa-cloud-download-alt"></i> 网盘下载
+                            </a>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // 搜索功能
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredData = softwareData.filter(software => 
+                software.name.toLowerCase().includes(searchTerm) || 
+                software.description.toLowerCase().includes(searchTerm) ||
+                software.category.toLowerCase().includes(searchTerm)
+            );
+            renderSoftwareCards(filteredData);
+        });
+
+        // 显示当前日期
+        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('zh-CN');
+        
+        // 初始渲染所有软件
+        renderSoftwareCards(softwareData);
+    </script>
+</body>
+</html>
