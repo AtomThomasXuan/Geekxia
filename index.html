@@ -129,14 +129,16 @@
             margin-bottom: 20px;
         }
         .link-group {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 12px;
             margin-top: 20px;
         }
         .link-btn {
             display: inline-flex;
             align-items: center;
             padding: 12px 20px;
-            margin-right: 12px;
-            margin-bottom: 12px;
             background: #f8f9fa;
             color: #2c3e50;
             text-decoration: none;
@@ -144,6 +146,7 @@
             font-weight: 600;
             transition: all 0.2s ease;
             border: 1px solid #eaeaea;
+            flex-shrink: 0;
         }
         .link-btn:hover {
             transform: translateY(-2px);
@@ -167,6 +170,7 @@
             color: #666;
             margin-top: 5px;
             display: block;
+            flex-basis: 100%;
         }
         footer {
             text-align: center;
@@ -186,6 +190,17 @@
             .brand {
                 flex-direction: column;
                 gap: 10px;
+            }
+            .link-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .link-btn {
+                justify-content: center;
+                margin-right: 0;
+            }
+            .password-hint {
+                text-align: center;
             }
         }
     </style>
@@ -269,8 +284,8 @@
                             </a>
                             <a href="${software.cloudUrl}" target="_blank" class="link-btn cloud">
                                 <i class="fas fa-cloud-download-alt"></i> 网盘下载
-                                ${software.password ? `<span class="password-hint">密码：${software.password}</span>` : ''}
                             </a>
+                            ${software.password ? `<span class="password-hint">提取密码：${software.password}</span>` : ''}
                         </div>
                     </div>
                 `;
