@@ -128,17 +128,30 @@
             color: #555;
             margin-bottom: 20px;
         }
+        /* 核心修改：强制按钮在同一行 */
         .link-group {
             display: flex;
-            flex-wrap: wrap;
             align-items: center;
-            gap: 12px;
             margin-top: 20px;
+            flex-wrap: nowrap; /* 禁止换行 */
+            overflow-x: auto; /* 如果按钮太多，可以横向滚动 */
+            gap: 8px; /* 缩小间距 */
+            padding-bottom: 5px; /* 为滚动条留空间 */
         }
+        
+        /* 隐藏滚动条但保留功能 */
+        .link-group::-webkit-scrollbar {
+            height: 4px;
+        }
+        .link-group::-webkit-scrollbar-thumb {
+            background: #ddd;
+            border-radius: 2px;
+        }
+        
         .link-btn {
             display: inline-flex;
             align-items: center;
-            padding: 12px 20px;
+            padding: 10px 14px;
             background: #f8f9fa;
             color: #2c3e50;
             text-decoration: none;
@@ -146,7 +159,9 @@
             font-weight: 600;
             transition: all 0.2s ease;
             border: 1px solid #eaeaea;
-            flex-shrink: 0;
+            font-size: 0.85rem;
+            white-space: nowrap; /* 禁止按钮内文字换行 */
+            flex-shrink: 0; /* 禁止按钮缩小 */
         }
         .link-btn:hover {
             transform: translateY(-2px);
@@ -162,15 +177,22 @@
             color: #2e7d32;
             border-color: #c8e6c9;
         }
+        .link-btn.github {
+            background: #333;
+            color: white;
+            border-color: #444;
+        }
+        .link-btn.github:hover {
+            background: #444;
+        }
         .link-btn i {
-            margin-right: 8px;
+            margin-right: 6px;
         }
         .password-hint {
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             color: #666;
-            margin-top: 5px;
             display: block;
-            flex-basis: 100%;
+            margin-top: 8px;
         }
         footer {
             text-align: center;
@@ -180,6 +202,7 @@
             font-size: 0.95rem;
             border-top: 1px solid #e0e0e0;
         }
+        /* 响应式调整 */
         @media (max-width: 768px) {
             .software-grid {
                 grid-template-columns: 1fr;
@@ -191,16 +214,23 @@
                 flex-direction: column;
                 gap: 10px;
             }
+            /* 手机端保持同行，允许横向滚动 */
             .link-group {
-                flex-direction: column;
-                align-items: stretch;
+                gap: 6px;
             }
             .link-btn {
-                justify-content: center;
-                margin-right: 0;
+                padding: 8px 12px;
+                font-size: 0.8rem;
             }
-            .password-hint {
-                text-align: center;
+        }
+        /* 极小屏幕调整 */
+        @media (max-width: 400px) {
+            .link-btn {
+                padding: 7px 10px;
+                font-size: 0.75rem;
+            }
+            .link-btn i {
+                margin-right: 4px;
             }
         }
     </style>
@@ -232,7 +262,7 @@
     </div>
 
     <script>
-        // Geekxia 软件数据 - 在这里添加或修改你的软件
+        // Geekxia 软件数据
         const softwareData = [
             {
                 name: "7-Zip",
@@ -241,6 +271,7 @@
                 category: "系统工具",
                 officialUrl: "https://www.7-zip.org/",
                 cloudUrl: "https://t-bu.cn/b0187zz53g",
+                githubUrl: "", // 暂无GitHub仓库
                 password: "5gzx"
             },
             {
@@ -250,6 +281,7 @@
                 category: "系统工具",
                 officialUrl: "https://www.keka.io/en/",
                 cloudUrl: "https://t-bu.cn/b0187zz51e",
+                githubUrl: "https://github.com/aonez/Keka", // 示例仓库
                 password: "9ccm"
             },
             {
@@ -259,7 +291,38 @@
                 category: "系统工具",
                 officialUrl: "https://www.voidtools.com",
                 cloudUrl: "https://t-bu.cn/b0187zz5be",
+                githubUrl: "", // 暂无GitHub仓库
                 password: "27p9"
+            },
+            {
+                name: "Rainmeter",
+                icon: "fas fa-tachometer-alt",
+                description: "一款功能强大的Windows桌面定制工具，允许用户安装和使用各种皮肤来显示系统信息、时间、天气等，打造个性化桌面。",
+                category: "桌面美化",
+                officialUrl: "https://www.rainmeter.net",
+                cloudUrl: "https://t-bu.cn/b018800ush",
+                githubUrl: "https://github.com/rainmeter/rainmeter", // 示例仓库
+                password: "2h9p"
+            },
+            {
+                name: "Nexus",
+                icon: "fas fa-th-large",
+                description: "一款知名的Windows桌面增强工具，用于创建美观且功能强大的Dock栏、系统工具栏和桌面小工具，提升操作效率与视觉体验。",
+                category: "桌面美化",
+                officialUrl: "https://www.winstep.net/nexus.asp",
+                cloudUrl: "https://t-bu.cn/b018800v8d",
+                githubUrl: "", // 暂无GitHub仓库
+                password: "d3cp"
+            },
+            {
+                name: "Lively Wallpaper",
+                icon: "fas fa-film",
+                description: "一款免费开源的动态桌面壁纸软件，支持将视频、网页、甚至小游戏设置为桌面背景，资源占用低且交互性强。",
+                category: "桌面美化",
+                officialUrl: "https://www.rocksdanister.com/lively/",
+                cloudUrl: "", // 无网盘链接
+                githubUrl: "https://github.com/rocksdanister/lively", // 示例仓库
+                password: ""
             }
         ];
 
@@ -271,6 +334,35 @@
             softwareList.forEach(software => {
                 const card = document.createElement('div');
                 card.className = 'software-card';
+                
+                // 动态生成按钮 - 按钮将按照添加顺序从左到右显示
+                let buttonsHtml = '';
+                
+                // 1. 总是添加官方网站按钮
+                buttonsHtml += `
+                    <a href="${software.officialUrl}" target="_blank" class="link-btn official">
+                        <i class="fas fa-external-link-alt"></i> 官方网站
+                    </a>
+                `;
+                
+                // 2. 如果有网盘链接，添加网盘按钮
+                if (software.cloudUrl) {
+                    buttonsHtml += `
+                        <a href="${software.cloudUrl}" target="_blank" class="link-btn cloud">
+                            <i class="fas fa-cloud-download-alt"></i> 网盘下载
+                        </a>
+                    `;
+                }
+                
+                // 3. 如果有GitHub仓库，添加GitHub按钮
+                if (software.githubUrl) {
+                    buttonsHtml += `
+                        <a href="${software.githubUrl}" target="_blank" class="link-btn github">
+                            <i class="fab fa-github"></i> GitHub
+                        </a>
+                    `;
+                }
+                
                 card.innerHTML = `
                     <div class="card-header">
                         <h3><i class="${software.icon}"></i> ${software.name}</h3>
@@ -279,20 +371,14 @@
                     <div class="card-body">
                         <p class="description">${software.description}</p>
                         <div class="link-group">
-                            <a href="${software.officialUrl}" target="_blank" class="link-btn official">
-                                <i class="fas fa-external-link-alt"></i> 官方网站
-                            </a>
-                            <a href="${software.cloudUrl}" target="_blank" class="link-btn cloud">
-                                <i class="fas fa-cloud-download-alt"></i> 网盘下载
-                            </a>
-                            ${software.password ? `<span class="password-hint">提取密码：${software.password}</span>` : ''}
+                            ${buttonsHtml}
                         </div>
+                        ${software.cloudUrl && software.password ? `<p class="password-hint">提取密码：${software.password}</p>` : ''}
                     </div>
                 `;
                 container.appendChild(card);
             });
             
-            // 更新软件计数
             document.getElementById('softwareCount').textContent = softwareList.length;
         }
 
@@ -312,7 +398,6 @@
         document.getElementById('currentYear').textContent = now.getFullYear();
         document.getElementById('currentDate').textContent = now.toLocaleDateString('zh-CN');
         
-        // 初始渲染所有软件
         renderSoftwareCards(softwareData);
     </script>
 </body>
