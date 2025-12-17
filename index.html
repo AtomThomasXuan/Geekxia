@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>实用软件资源库</title>
+    <title>Geekxia | 极客侠工具库</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -28,16 +28,27 @@
             padding: 40px 20px;
             margin-bottom: 30px;
         }
+        .brand {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .brand-icon {
+            font-size: 2.5rem;
+            color: #3498db;
+        }
         header h1 {
             font-size: 2.8rem;
             color: #2c3e50;
-            margin-bottom: 10px;
+            margin-bottom: 0;
         }
-        header p {
-            font-size: 1.2rem;
+        .tagline {
+            font-size: 1.1rem;
             color: #7f8c8d;
-            max-width: 600px;
-            margin: 0 auto;
+            font-style: italic;
+            margin-top: 5px;
         }
         .search-box {
             max-width: 600px;
@@ -47,15 +58,16 @@
         .search-box input {
             width: 100%;
             padding: 15px 20px 15px 50px;
-            border: none;
+            border: 2px solid #ddd;
             border-radius: 50px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
             font-size: 1rem;
             transition: all 0.3s ease;
         }
         .search-box input:focus {
             outline: none;
-            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+            border-color: #3498db;
+            box-shadow: 0 6px 12px rgba(52, 152, 219, 0.2);
         }
         .search-box i {
             position: absolute;
@@ -78,10 +90,11 @@
             transition: all 0.3s ease;
             display: flex;
             flex-direction: column;
+            border-top: 4px solid #3498db;
         }
         .software-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
         }
         .card-header {
             padding: 25px 25px 15px;
@@ -98,9 +111,22 @@
             margin-right: 10px;
             color: #3498db;
         }
+        .card-category {
+            display: inline-block;
+            background: #ecf0f1;
+            color: #7f8c8d;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
         .card-body {
             padding: 25px;
             flex-grow: 1;
+        }
+        .description {
+            color: #555;
+            margin-bottom: 20px;
         }
         .link-group {
             margin-top: 20px;
@@ -120,18 +146,27 @@
             border: 1px solid #eaeaea;
         }
         .link-btn:hover {
-            transform: scale(1.05);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
         .link-btn.official {
             background: #e3f2fd;
             color: #1565c0;
+            border-color: #bbdefb;
         }
         .link-btn.cloud {
             background: #e8f5e9;
             color: #2e7d32;
+            border-color: #c8e6c9;
         }
         .link-btn i {
             margin-right: 8px;
+        }
+        .password-hint {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 5px;
+            display: block;
         }
         footer {
             text-align: center;
@@ -148,19 +183,27 @@
             header h1 {
                 font-size: 2.2rem;
             }
+            .brand {
+                flex-direction: column;
+                gap: 10px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1><i class="fas fa-toolbox"></i> 实用软件资源库</h1>
-            <p>精心收集各类实用工具、免费软件与教程资源，持续更新，助力高效工作与学习。</p>
+            <div class="brand">
+                <i class="fas fa-hat-wizard brand-icon"></i>
+                <h1>Geekxia</h1>
+            </div>
+            <p class="tagline">极客眼光，侠义分享</p>
+            <p>专业收集高效、免费的软件工具与实用资源</p>
         </header>
 
         <div class="search-box">
             <i class="fas fa-search"></i>
-            <input type="text" id="searchInput" placeholder="输入软件名称或关键词进行搜索...">
+            <input type="text" id="searchInput" placeholder="搜索工具名称或功能...">
         </div>
 
         <div class="software-grid" id="softwareContainer">
@@ -168,61 +211,40 @@
         </div>
 
         <footer>
-            <p>本页面仅用于分享与学习目的，所有资源版权归原作者所有 | 最后更新：<span id="currentDate"></span></p>
-            <p>Powered by GitHub Pages | 使用建议或问题反馈请通过GitHub提交</p>
+            <p>© <span id="currentYear"></span> Geekxia 极客侠工具库 | 本页面仅用于分享与学习目的，所有资源版权归原作者所有</p>
+            <p>已更新 <span id="softwareCount">0</span> 款工具 | 最后更新：<span id="currentDate"></span></p>
         </footer>
     </div>
 
     <script>
-        // 软件数据数组 - 在这里添加或修改你的软件
+        // Geekxia 软件数据 - 在这里添加或修改你的软件
         const softwareData = [
-            {
-                name: "VS Code",
-                icon: "fas fa-code",
-                description: "微软推出的免费、开源、强大的代码编辑器，支持多种编程语言和丰富的扩展插件。",
-                officialUrl: "https://code.visualstudio.com/",
-                cloudUrl: "https://pan.example.com/s/vscode",
-                category: "开发工具"
-            },
-            {
-                name: "OBS Studio",
-                icon: "fas fa-video",
-                description: "免费开源的视频录制和直播推流软件，功能强大，广泛用于游戏录制、课程录制和直播。",
-                officialUrl: "https://obsproject.com/",
-                cloudUrl: "https://pan.example.com/s/obs",
-                category: "媒体工具"
-            },
-            {
-                name: "GIMP",
-                icon: "fas fa-paint-brush",
-                description: "功能强大的免费开源图像编辑器，常被看作是Adobe Photoshop的免费替代品。",
-                officialUrl: "https://www.gimp.org/",
-                cloudUrl: "https://pan.example.com/s/gimp",
-                category: "设计工具"
-            },
             {
                 name: "7-Zip",
                 icon: "fas fa-file-archive",
-                description: "完全免费的开源文件压缩/解压工具，支持RAR、ZIP、TAR等多种压缩格式。",
+                description: "一款完全免费开源的高压缩比文件压缩软件，支持ZIP、RAR、GZIP等多种格式，以其极高的压缩比和速度而闻名。",
+                category: "系统工具",
                 officialUrl: "https://www.7-zip.org/",
-                cloudUrl: "https://pan.example.com/s/7zip",
-                category: "系统工具"
+                cloudUrl: "https://t-bu.cn/b0187zz53g",
+                password: "5gzx"
             },
             {
-                name: "Notion",
-                icon: "fas fa-sticky-note",
-                description: "一款集笔记、任务、数据库、知识库于一体的全能型协作工具，个人版免费。",
-                officialUrl: "https://www.notion.so/",
-                cloudUrl: "https://pan.example.com/s/notion",
-                category: "效率工具"
+                name: "Keka",
+                icon: "fas fa-compress-arrows-alt",
+                description: "macOS平台上一款简单易用且功能强大的文件压缩解压工具，支持创建多种加密压缩格式，完美替代付费软件。",
+                category: "系统工具",
+                officialUrl: "https://www.keka.io/en/",
+                cloudUrl: "https://t-bu.cn/b0187zz51e",
+                password: "9ccm"
             },
             {
-                name: "VLC Media Player",
-                icon: "fas fa-play-circle",
-                description: "免费开源的跨平台多媒体播放器，几乎可以播放所有格式的音视频文件。",
-                officialUrl: "https://www.videolan.org/vlc/",
-                cloudUrl: "https://pan.example.com/s/vlc",
-                category: "媒体工具"
+                name: "Everything",
+                icon: "fas fa-search",
+                description: "Windows平台上最快的文件搜索工具，基于文件名实时搜索，几乎瞬间就能找到你需要的任何文件，大幅提升工作效率。",
+                category: "系统工具",
+                officialUrl: "https://www.voidtools.com",
+                cloudUrl: "https://t-bu.cn/b0187zz5be",
+                password: "27p9"
             }
         ];
 
@@ -237,22 +259,26 @@
                 card.innerHTML = `
                     <div class="card-header">
                         <h3><i class="${software.icon}"></i> ${software.name}</h3>
-                        <p><i class="fas fa-tag"></i> 分类：${software.category}</p>
+                        <span class="card-category">${software.category}</span>
                     </div>
                     <div class="card-body">
-                        <p>${software.description}</p>
+                        <p class="description">${software.description}</p>
                         <div class="link-group">
                             <a href="${software.officialUrl}" target="_blank" class="link-btn official">
                                 <i class="fas fa-external-link-alt"></i> 官方网站
                             </a>
                             <a href="${software.cloudUrl}" target="_blank" class="link-btn cloud">
                                 <i class="fas fa-cloud-download-alt"></i> 网盘下载
+                                ${software.password ? `<span class="password-hint">密码：${software.password}</span>` : ''}
                             </a>
                         </div>
                     </div>
                 `;
                 container.appendChild(card);
             });
+            
+            // 更新软件计数
+            document.getElementById('softwareCount').textContent = softwareList.length;
         }
 
         // 搜索功能
@@ -266,8 +292,10 @@
             renderSoftwareCards(filteredData);
         });
 
-        // 显示当前日期
-        document.getElementById('currentDate').textContent = new Date().toLocaleDateString('zh-CN');
+        // 显示当前年份和日期
+        const now = new Date();
+        document.getElementById('currentYear').textContent = now.getFullYear();
+        document.getElementById('currentDate').textContent = now.toLocaleDateString('zh-CN');
         
         // 初始渲染所有软件
         renderSoftwareCards(softwareData);
