@@ -6,6 +6,7 @@
     <title>Geekxia | 极客侠工具库</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* 样式部分与之前完全相同，已确保按钮同行 */
         * {
             margin: 0;
             padding: 0;
@@ -128,18 +129,15 @@
             color: #555;
             margin-bottom: 20px;
         }
-        /* 核心修改：强制按钮在同一行 */
         .link-group {
             display: flex;
             align-items: center;
             margin-top: 20px;
-            flex-wrap: nowrap; /* 禁止换行 */
-            overflow-x: auto; /* 如果按钮太多，可以横向滚动 */
-            gap: 8px; /* 缩小间距 */
-            padding-bottom: 5px; /* 为滚动条留空间 */
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            gap: 8px;
+            padding-bottom: 5px;
         }
-        
-        /* 隐藏滚动条但保留功能 */
         .link-group::-webkit-scrollbar {
             height: 4px;
         }
@@ -147,7 +145,6 @@
             background: #ddd;
             border-radius: 2px;
         }
-        
         .link-btn {
             display: inline-flex;
             align-items: center;
@@ -160,8 +157,8 @@
             transition: all 0.2s ease;
             border: 1px solid #eaeaea;
             font-size: 0.85rem;
-            white-space: nowrap; /* 禁止按钮内文字换行 */
-            flex-shrink: 0; /* 禁止按钮缩小 */
+            white-space: nowrap;
+            flex-shrink: 0;
         }
         .link-btn:hover {
             transform: translateY(-2px);
@@ -202,7 +199,6 @@
             font-size: 0.95rem;
             border-top: 1px solid #e0e0e0;
         }
-        /* 响应式调整 */
         @media (max-width: 768px) {
             .software-grid {
                 grid-template-columns: 1fr;
@@ -214,7 +210,6 @@
                 flex-direction: column;
                 gap: 10px;
             }
-            /* 手机端保持同行，允许横向滚动 */
             .link-group {
                 gap: 6px;
             }
@@ -223,7 +218,6 @@
                 font-size: 0.8rem;
             }
         }
-        /* 极小屏幕调整 */
         @media (max-width: 400px) {
             .link-btn {
                 padding: 7px 10px;
@@ -271,7 +265,7 @@
                 category: "系统工具",
                 officialUrl: "https://www.7-zip.org/",
                 cloudUrl: "https://t-bu.cn/b0187zz53g",
-                githubUrl: "", // 暂无GitHub仓库
+                githubUrl: "",
                 password: "5gzx"
             },
             {
@@ -281,7 +275,7 @@
                 category: "系统工具",
                 officialUrl: "https://www.keka.io/en/",
                 cloudUrl: "https://t-bu.cn/b0187zz51e",
-                githubUrl: "https://github.com/aonez/Keka", // 示例仓库
+                githubUrl: "https://github.com/aonez/Keka",
                 password: "9ccm"
             },
             {
@@ -291,7 +285,7 @@
                 category: "系统工具",
                 officialUrl: "https://www.voidtools.com",
                 cloudUrl: "https://t-bu.cn/b0187zz5be",
-                githubUrl: "", // 暂无GitHub仓库
+                githubUrl: "",
                 password: "27p9"
             },
             {
@@ -301,7 +295,7 @@
                 category: "桌面美化",
                 officialUrl: "https://www.rainmeter.net",
                 cloudUrl: "https://t-bu.cn/b018800ush",
-                githubUrl: "https://github.com/rainmeter/rainmeter", // 示例仓库
+                githubUrl: "https://github.com/rainmeter/rainmeter",
                 password: "2h9p"
             },
             {
@@ -311,7 +305,7 @@
                 category: "桌面美化",
                 officialUrl: "https://www.winstep.net/nexus.asp",
                 cloudUrl: "https://t-bu.cn/b018800v8d",
-                githubUrl: "", // 暂无GitHub仓库
+                githubUrl: "",
                 password: "d3cp"
             },
             {
@@ -320,9 +314,40 @@
                 description: "一款免费开源的动态桌面壁纸软件，支持将视频、网页、甚至小游戏设置为桌面背景，资源占用低且交互性强。",
                 category: "桌面美化",
                 officialUrl: "https://www.rocksdanister.com/lively/",
-                cloudUrl: "", // 无网盘链接
-                githubUrl: "https://github.com/rocksdanister/lively", // 示例仓库
+                cloudUrl: "",
+                githubUrl: "https://github.com/rocksdanister/lively",
                 password: ""
+            },
+            // ===== 新增的软件从这里开始 =====
+            {
+                name: "LANDrop",
+                icon: "fas fa-wifi",
+                description: "一款开源、跨平台（Windows/macOS/Linux/Android/iOS）的局域网文件传输工具，无需互联网连接，传输速度快且安全。",
+                category: "文件传输",
+                officialUrl: "https://landrop.app/",
+                cloudUrl: "https://t-bu.cn/b01880bxgj",
+                githubUrl: "https://github.com/LANDrop/LANDrop",
+                password: "3jv1"
+            },
+            {
+                name: "LocalSend",
+                icon: "fas fa-share-alt",
+                description: "一个免费、开源、跨平台的本地文件共享应用，使用REST API和HTTPS加密，无需互联网，注重隐私和安全。",
+                category: "文件传输",
+                officialUrl: "https://localsend.org/",
+                cloudUrl: "https://t-bu.cn/b01880byfe",
+                githubUrl: "https://github.com/localsend/localsend",
+                password: "24y7"
+            },
+            {
+                name: "vivo办公套件",
+                icon: "fas fa-briefcase",
+                description: "vivo官方推出的移动办公软件套装，集文档编辑、表格处理、演示文稿等功能于一体，与主流格式兼容，适合移动办公场景。",
+                category: "办公软件",
+                officialUrl: "https://pc.vivo.com/",
+                cloudUrl: "", // 您后续可在此添加网盘链接
+                githubUrl: "", // 通常官方应用无GitHub仓库
+                password: "" // 您后续可在此添加提取密码
             }
         ];
 
@@ -335,7 +360,7 @@
                 const card = document.createElement('div');
                 card.className = 'software-card';
                 
-                // 动态生成按钮 - 按钮将按照添加顺序从左到右显示
+                // 动态生成按钮
                 let buttonsHtml = '';
                 
                 // 1. 总是添加官方网站按钮
@@ -398,6 +423,7 @@
         document.getElementById('currentYear').textContent = now.getFullYear();
         document.getElementById('currentDate').textContent = now.toLocaleDateString('zh-CN');
         
+        // 初始渲染所有软件
         renderSoftwareCards(softwareData);
     </script>
 </body>
